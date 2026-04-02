@@ -40,7 +40,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
 TOKEN = "8217901668:AAGM-ysVz2KSNIMlhYu7tOySLf8QDfqdZAA"
 
 # ساخت ربات
-app = ApplicationBuilder().token(8217901668: AAGM-ysVz2KSNIMlhYu7tOySLf8QDfqdZAA).build()
+app = ApplicationBuilder().token(: AAGM-ysVz2KSNIMlhYu7tOySLf8QDfqdZAA).build()
 
 # هندل پیام‌ها
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
