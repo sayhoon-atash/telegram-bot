@@ -1,19 +1,11 @@
-from telegram import Update
-from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTypes
 import random
+from telegram import Update
+from telegram.ext import ApplicationBuilder, MessageHandler, ContextTypes, filters
 
-# جواب‌ها
-greetings = ["سلام 😄", "هی رفیق 👋", "خوش آمدی دلاور 😊"]
-how_are_you = ["خوبم مرسی 😎", "عالی‌ام 😁", "تو خوبی؟ 😉"]
-bye_msgs = ["خداحافظ 👋", "بعداً میبینمت 😄", "مواظب خودت باش ❤️"]
-jokes = [
-    "برنامه‌نویس بدون قهوه یعنی هیچی ☕😂",
-    "یه باگ داشتم، الان دو تا شده 🤣",
-    "زندگی مثل کده... همیشه یه ارور داره 😅"
-]
-
-# تابع اصلی
-
+greetings = ["سلام 😄", "درود 👋", "هی 🤖"]
+how_are_you = ["خوبم 😎", "عالی هستم 🔥"]
+bye_msgs = ["خدافظ 👋", "بعداً میبینمت 😄"]
+jokes = ["😂 طنز آماده ندارم هنوز"]
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_text = update.message.text.lower()
@@ -24,27 +16,23 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif "خوبی" in user_text or "چطوری" in user_text:
         reply = random.choice(how_are_you)
 
-    elif "خداحافظ" in user_text or "بای" in user_text:
+    elif "بای" in user_text:
         reply = random.choice(bye_msgs)
 
-    elif "جوک" in user_text:
+    elif "joke" in user_text:
         reply = random.choice(jokes)
 
     else:
-        reply = f"😄 گفتی: {user_text}"
+        reply = f"گفتی: {user_text}"
 
     await update.message.reply_text(reply)
 
+TOKEN = "YOUR_BOT_TOKEN_HERE"
 
-# 🔴 اینجا توکن رباتتو بذار
-TOKEN = "8217901668:AAGM-ysVz2KSNIMlhYu7tOySLf8QDfqdZAA"
+app = ApplicationBuilder().token(TOKEN).build()
 
-# ساخت ربات
-app = ApplicationBuilder().token(: AAGM-ysVz2KSNIMlhYu7tOySLf8QDfqdZAA).build()
-
-# هندل پیام‌ها
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
 
-# اجرا (بدون ارور)
-print("ربات روشن شد 🚀")
-app.run_polling(close_loop=False)
+print("Bot is running...")
+
+app.run_polling()
